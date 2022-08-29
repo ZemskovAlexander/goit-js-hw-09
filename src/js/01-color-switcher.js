@@ -10,9 +10,8 @@ let timerId = null;
 
 start.addEventListener("click", () => {
   timerId = setInterval(() => {
-    console.log(`I love async JS!  ${Math.random()}`);
+    getRandomHexColor(body)
   }, 1000);
-  console.log(start)
 });
 
 
