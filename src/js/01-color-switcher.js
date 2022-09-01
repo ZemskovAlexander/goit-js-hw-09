@@ -10,9 +10,7 @@ let timerId = null;
 
 start.addEventListener('click', () => {
   timerId = setInterval(() => {
-    getRandomHexColor(body);
-    console.log(`I love async JS!  ${Math.random()}`);
-  }, 1000);
+    body.style.backgroundColor = getRandomHexColor()}, 1000);
 });
 
 stop.addEventListener('click', () => {
