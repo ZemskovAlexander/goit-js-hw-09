@@ -8,7 +8,8 @@ const timer = {
     setInterval(() => {
       const currentTime = Date.now();
       const deltaTime = currentTime - startTime;
-      const timeComponents = getTimeComponents(deltaTime);
+      const timeComponents = convertMs(deltaTime);
+      // console.log(timeComponents);
       console.log(timeComponents);
     }, 1000);
   },
