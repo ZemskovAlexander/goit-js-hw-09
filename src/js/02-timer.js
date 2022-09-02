@@ -1,29 +1,31 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
-const timer = {
-  start() {
-    const startTime = Date.now();
-
-    setInterval(() => {
-      const currentTime = Date.now();
-      const deltaTime = currentTime - startTime;
-      const timeComponents = convertMs(deltaTime);
-      // console.log(timeComponents);
-      console.log(timeComponents);
-    }, 1000);
-  },
+const refs = {
+  startBtn: document.querySelector('button[data-start]'),
 };
 
-timer.start();
+refs.startBtn.addEventListener('click', () => {
+  timer.start();
+});
 
-const options = {
-  enableTime: true,
-  time_24hr: true,
-  defaultDate: new Date(),
-  minuteIncrement: 1,
-  onClose(selectedDates) {
-    console.log(selectedDates[0]);
+const timer = {
+  intervalId: null,
+  isActive: false,
+  start() {
+    if (this.isActive) {
+      return;
+    }
+
+    const startTime = Date.now();
+    this.isActive = true;
+
+    this.intervalId = setInterval(() => {
+      const currentTime = Date.now();
+      const deltaTime = currentTime - startTime;
+      const { days, hours, minutes, seconds } = convertMs(deltaTime);
+      console.log(`${days}:${hours}:${minutes}:${seconds}`);
+    }, 1000);
   },
 };
 
@@ -46,6 +48,14 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
+const options = {
+  enableTime: true,
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+  onClose(selectedDates) {
+    console.log(selectedDates[0]);
+  },
+};
+
+flatpickr('input[type="text"]', options);
