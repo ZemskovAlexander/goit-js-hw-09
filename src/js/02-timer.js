@@ -3,11 +3,19 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 const refs = {
   startBtn: document.querySelector('button[data-start]'),
+
+  // selectedTime: document.querySelector('#datetime-picker'),
+
+  days: document.querySelector('[data-days]'),
+  hours: document.querySelector('[data-hours]'),
+  minutes: document.querySelector('[data-minutes]'),
+  seconds: document.querySelector('[data-seconds]'),
 };
 
 refs.startBtn.addEventListener('click', () => {
   timer.start();
 });
+
 
 const timer = {
   intervalId: null,
@@ -23,11 +31,21 @@ const timer = {
     this.intervalId = setInterval(() => {
       const currentTime = Date.now();
       const deltaTime = currentTime - startTime;
-      const { days, hours, minutes, seconds } = convertMs(deltaTime);
+      const time = convertMs(deltaTime);
+
+      updateClockFace(time);
+
       console.log(`${days}:${hours}:${minutes}:${seconds}`);
     }, 1000);
   },
 };
+
+function updateClockFace({ days, hours, minutes, seconds }) {
+  refs.days.textContent = `${days}`;
+  refs.hours.textContent = `${hours}`;
+  refs.minutes.textContent = `${minutes}`;
+  refs.seconds.textContent = `${seconds}`;
+}
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
