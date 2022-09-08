@@ -5,6 +5,7 @@ const refs = {
   startBtn: document.querySelector('button[data-start]'),
 
   // selectedTime: document.querySelector('#datetime-picker'),
+  selectedDates: document.querySelector('input[type="text"]'),
 
   days: document.querySelector('[data-days]'),
   hours: document.querySelector('[data-hours]'),
@@ -15,7 +16,6 @@ const refs = {
 refs.startBtn.addEventListener('click', () => {
   timer.start();
 });
-
 
 const timer = {
   intervalId: null,
@@ -30,7 +30,7 @@ const timer = {
 
     this.intervalId = setInterval(() => {
       const currentTime = Date.now();
-      const deltaTime = currentTime - startTime;
+      const deltaTime = refs.selectedDates - startTime;
       const time = convertMs(deltaTime);
 
       updateClockFace(time);
