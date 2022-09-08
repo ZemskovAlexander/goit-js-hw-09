@@ -30,7 +30,7 @@ const timer = {
 
     this.intervalId = setInterval(() => {
       const currentTime = Date.now();
-      const deltaTime = refs.selectedDates - startTime;
+      const deltaTime = refs.selectedDates - currentTime;
       const time = convertMs(deltaTime);
 
       updateClockFace(time);
