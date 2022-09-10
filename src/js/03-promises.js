@@ -1,6 +1,5 @@
-const inputData = document.querySelector('button[submit]');
+const inputData = document.querySelector('form');
 
-console.log(inputData);
 inputData.addEventListener('submit', evt => {
   evt.preventDefault();
   const formData = new FormData(inputData);
